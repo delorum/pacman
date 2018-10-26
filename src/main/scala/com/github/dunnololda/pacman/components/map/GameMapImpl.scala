@@ -49,6 +49,7 @@ class GameMapImpl(terminal: Terminal) extends GameMap {
       terminal.setCursorPosition(to.x, to.y)
       terminal.putCharacter(c)
       terminal.setCursorPosition(cols, rows - 1)
+      terminal.putCharacter(' ')
       terminal.flush()
       map(from.x)(from.y) = FLOOR
       map(to.x)(to.y) = c
