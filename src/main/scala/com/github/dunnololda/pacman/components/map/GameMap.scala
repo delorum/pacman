@@ -12,4 +12,6 @@ trait GameMap {
   def initCoords: InitCoords
 
   def move(from: Coord, to: Coord, c: Char): Boolean
+
+  def canGo(to: Coord): Boolean
 }

@@ -12,6 +12,7 @@ object PacmanGame extends App {
 
   while (true) {
     components.checkInputs()
-    Thread.sleep(50)
+    components.action()
+    Thread.sleep(100)
   }
 }

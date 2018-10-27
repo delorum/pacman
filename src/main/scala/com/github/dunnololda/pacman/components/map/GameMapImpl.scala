@@ -41,8 +41,12 @@ class GameMapImpl(terminal: Terminal) extends GameMap {
 
   private val FLOOR = '.'
 
+  def canGo(to: Coord): Boolean = {
+    map(to.x)(to.y) == FLOOR
+  }
+
   def move(from: Coord, to: Coord, c: Char): Boolean = {
-    if (map(to.x)(to.y) == FLOOR) {
+    if (canGo(to)) {
       terminal.setCursorPosition(from.x, from.y)
       terminal.putCharacter(FLOOR)
       terminal.flush()

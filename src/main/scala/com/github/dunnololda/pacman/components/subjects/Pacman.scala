@@ -1,7 +1,7 @@
 package com.github.dunnololda.pacman.components.subjects
 
-import com.github.dunnololda.pacman.components.map.{GameMap, GameMapImpl}
-import com.github.dunnololda.pacman.util.Coord
+import com.github.dunnololda.pacman.components.map.GameMap
+import com.github.dunnololda.pacman.util.{Coord, Dir}
 
 /**
   * TODO
@@ -14,7 +14,40 @@ class Pacman(map: GameMap) {
 
   private val c = 'X'
 
+  private var innerDir: Dir = Dir.NoDir
+
   def coord = Coord(x, y)
+
+  def dir: Dir = innerDir
+
+  def dirUp: Boolean = {
+    val res = map.canGo(Coord(x, y - 1))
+    if (res) innerDir = Dir.Up
+    res
+  }
+
+  def dirDown: Boolean = {
+    val res = map.canGo(Coord(x, y + 1))
+    if (res) innerDir = Dir.Down
+    res
+  }
+
+  def dirLeft: Boolean = {
+    val res = map.canGo(Coord(x - 1, y))
+    if (res) innerDir = Dir.Left
+    res
+  }
+
+  def dirRight: Boolean = {
+    val res = map.canGo(Coord(x + 1, y))
+    if (res) innerDir = Dir.Right
+    res
+  }
+
+  def noDir: Boolean = {
+    innerDir = Dir.NoDir
+    true
+  }
 
   def moveUp: Boolean = {
     val res = map.move(coord, Coord(x, y - 1), c)
@@ -38,5 +71,23 @@ class Pacman(map: GameMap) {
     val res = map.move(coord, Coord(x + 1, y), c)
     if (res) x += 1
     res
+  }
+
+  def action(): Unit = {
+    dir match {
+      case Dir.Up =>
+        val res = moveUp
+        if (!res) noDir
+      case Dir.Down =>
+        val res = moveDown
+        if (!res) noDir
+      case Dir.Left =>
+        val res = moveLeft
+        if (!res) noDir
+      case Dir.Right =>
+        val res = moveRight
+        if (!res) noDir
+      case Dir.NoDir =>
+    }
   }
 }
