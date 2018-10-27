@@ -54,13 +54,13 @@ trait ControlsSupport extends ControlsAware with InputAware with SubjectsAware w
 
   private val innerCommands = ArrayBuffer[KeyType]()
 
-  def addCommand(k: KeyType): Unit = {
+  private def addCommand(k: KeyType): Unit = {
     if (!innerCommands.contains(k)) {
       innerCommands += k
     }
   }
 
-  def executeCommand(func: KeyType => Boolean): Unit = {
+  private def executeCommand(func: KeyType => Boolean): Unit = {
     if (innerCommands.nonEmpty) {
       val k = innerCommands.head
       val res = func(k)
