@@ -1,6 +1,7 @@
 package com.github.dunnololda.pacman.components.subjects.pacman
 
 import com.github.dunnololda.pacman.components.map.MapAware
+import com.github.dunnololda.pacman.util.Coord
 
 /**
   * TODO
@@ -9,26 +10,24 @@ import com.github.dunnololda.pacman.components.map.MapAware
   */
 trait PacmanMoveAware extends MapAware with PacmanCoordAware with PacmanCharAware {
   def moveUp: Boolean = {
-    val res = map.move(coord, coord.up, c)
-    if (res) updateCoord(coord.up)
-    res
+    move(coord.up)
   }
 
   def moveDown: Boolean = {
-    val res = map.move(coord, coord.down, c)
-    if (res) updateCoord(coord.down)
-    res
+    move(coord.down)
   }
 
   def moveLeft: Boolean = {
-    val res = map.move(coord, coord.left, c)
-    if (res) updateCoord(coord.left)
-    res
+    move(coord.left)
   }
 
   def moveRight: Boolean = {
-    val res = map.move(coord, coord.right, c)
-    if (res) updateCoord(coord.right)
+    move(coord.right)
+  }
+
+  private def move(to: Coord) = {
+    val res = map.move(coord, to, c)
+    if (res) updateCoord(to)
     res
   }
 }

@@ -4,6 +4,7 @@ import com.github.dunnololda.pacman.components.input.InputAware
 import com.github.dunnololda.pacman.components.subjects.SubjectsAware
 import com.github.dunnololda.pacman.components.terminal.TerminalAware
 import com.googlecode.lanterna.input.KeyType
+import com.googlecode.lanterna.input.KeyType._
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -21,50 +22,31 @@ trait ControlsSupport extends ControlsAware with InputAware with SubjectsAware w
         sys.exit(0)
       } else {
         k.getKeyType match {
-          case KeyType.ArrowUp =>
-            val res = pacman.dirUp
-            if (!res) addCommand(k.getKeyType)
-          case KeyType.ArrowDown =>
-            val res = pacman.dirDown
-            if (!res) addCommand(k.getKeyType)
-          case KeyType.ArrowLeft =>
-            val res = pacman.dirLeft
-            if (!res) addCommand(k.getKeyType)
-          case KeyType.ArrowRight =>
-            val res = pacman.dirRight
-            if (!res) addCommand(k.getKeyType)
+          case ArrowUp => executeOrAddCommand(k.getKeyType)(pacman.dirUp)
+          case ArrowDown => executeOrAddCommand(k.getKeyType)(pacman.dirDown)
+          case ArrowLeft => executeOrAddCommand(k.getKeyType)(pacman.dirLeft)
+          case ArrowRight => executeOrAddCommand(k.getKeyType)(pacman.dirRight)
           case _ =>
         }
       }
       var skip = pollInput
       while (skip != null) skip = pollInput
     }
-    executeCommand {
-      case KeyType.ArrowUp =>
-        pacman.dirUp
-      case KeyType.ArrowDown =>
-        pacman.dirDown
-      case KeyType.ArrowLeft =>
-        pacman.dirLeft
-      case KeyType.ArrowRight =>
-        pacman.dirRight
-      case _ => true
+    tryExecuteCommand()
+  }
+
+  private val innerCommands = ArrayBuffer[(KeyType, () => Boolean)]()
+
+  private def executeOrAddCommand(k: KeyType)(func: => Boolean): Unit = {
+    if (!func && !innerCommands.exists(_._1 == k)) {
+      innerCommands += (k -> (() => func))
     }
   }
 
-  private val innerCommands = ArrayBuffer[KeyType]()
-
-  private def addCommand(k: KeyType): Unit = {
-    if (!innerCommands.contains(k)) {
-      innerCommands += k
-    }
-  }
-
-  private def executeCommand(func: KeyType => Boolean): Unit = {
+  private def tryExecuteCommand(): Unit = {
     if (innerCommands.nonEmpty) {
-      val k = innerCommands.head
-      val res = func(k)
-      if (res) {
+      val (_, func) = innerCommands.head
+      if (func()) {
         innerCommands.remove(0)
       }
     }

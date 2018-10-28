@@ -11,19 +11,13 @@ import com.github.dunnololda.pacman.util.Dir
 trait PacmanActionAware extends ActionAware with PacmanDirAware with PacmanMoveAware {
   def action(): Unit = {
     dir match {
-      case Dir.Up =>
-        val res = moveUp
-        if (!res) noDir
-      case Dir.Down =>
-        val res = moveDown
-        if (!res) noDir
-      case Dir.Left =>
-        val res = moveLeft
-        if (!res) noDir
-      case Dir.Right =>
-        val res = moveRight
-        if (!res) noDir
+      case Dir.Up => moveOrNoDir(moveUp)
+      case Dir.Down => moveOrNoDir(moveDown)
+      case Dir.Left => moveOrNoDir(moveLeft)
+      case Dir.Right => moveOrNoDir(moveRight)
       case Dir.NoDir =>
     }
   }
+
+  private def moveOrNoDir(func: => Boolean) = if (!func) noDir
 }
