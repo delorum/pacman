@@ -35,6 +35,11 @@
       <artifactId>lanterna</artifactId>
       <version>3.0.1</version>
     </dependency>
+    <dependency>
+      <groupId>slick</groupId>
+      <artifactId>slick</artifactId>
+      <version>274</version>
+    </dependency>
   </dependencies>
 
   <build>
