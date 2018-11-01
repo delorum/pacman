@@ -3,6 +3,7 @@ package com.github.dunnololda.pacman.components.map
 import com.github.dunnololda.pacman.util.Coord
 import com.github.dunnololda.pacman.{InitCoords, InitCoordsBuilder}
 import com.googlecode.lanterna.terminal.Terminal
+import com.github.dunnololda.pacman.common.Symbols._
 
 /**
   * TODO
@@ -39,25 +40,57 @@ class GameMapImpl(terminal: Terminal) extends GameMap {
 
   val initCoords: InitCoords = initCoordsBuilder.build()
 
-  private val FLOOR = '.'
-
   def canGo(to: Coord): Boolean = {
     map(to.x)(to.y) == FLOOR
   }
 
   def move(from: Coord, to: Coord, c: Char): Boolean = {
-    if (canGo(to)) {
-      terminal.setCursorPosition(from.x, from.y)
-      terminal.putCharacter(FLOOR)
-      terminal.flush()
-      terminal.setCursorPosition(to.x, to.y)
-      terminal.putCharacter(c)
-      terminal.setCursorPosition(cols, rows - 1)
-      terminal.putCharacter(' ')
-      terminal.flush()
-      map(from.x)(from.y) = FLOOR
-      map(to.x)(to.y) = c
-      true
-    } else false
+    val res = canGo(to)
+    if (res) {
+      putCharacter(from, FLOOR)
+      putCharacter(to, c)
+      flush()
+    }
+    res
+  }
+
+  def randomFreePlace: Coord = {
+    val freePlaces = map.zipWithIndex.flatMap { case (column, col) =>
+      column.zipWithIndex.filter(_._1 == FLOOR).map { case (_, row) =>
+        (col, row)
+      }
+    }
+    if (freePlaces.isEmpty) sys.error("no free place")
+    else {
+      val (col, row) = freePlaces((math.random() * freePlaces.length).toInt)
+      require(map(col)(row) == FLOOR, s"wrong free place ($col, $row) calculated")
+      Coord(col, row)
+    }
+  }
+
+  def place(to: Coord, c: Char): Boolean = {
+    val res = canGo(to)
+    if (res) {
+      putCharacter(to, c)
+      flush()
+    }
+    res
+  }
+
+  def remove(from: Coord): Unit = {
+    putCharacter(from, FLOOR)
+    flush()
+  }
+
+  private def putCharacter(to: Coord, c: Char): Unit = {
+    terminal.setCursorPosition(to.x, to.y)
+    terminal.putCharacter(c)
+    map(to.x)(to.y) = c
+  }
+
+  private def flush(): Unit = {
+    terminal.setCursorPosition(cols, rows - 1)
+    terminal.putCharacter(' ')
+    terminal.flush()
   }
 }

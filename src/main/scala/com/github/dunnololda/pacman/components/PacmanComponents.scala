@@ -1,6 +1,7 @@
 package com.github.dunnololda.pacman.components
 
 import com.github.dunnololda.pacman.components.action.ActionSupport
+import com.github.dunnololda.pacman.components.apples.ApplesSupport
 import com.github.dunnololda.pacman.components.controls.ControlsSupport
 import com.github.dunnololda.pacman.components.input.InputSupport
 import com.github.dunnololda.pacman.components.map.MapSupport
@@ -15,6 +16,7 @@ import com.github.dunnololda.pacman.components.terminal.TerminalSupport
 class PacmanComponents
   extends TerminalSupport
     with MapSupport
+    with ApplesSupport
     with SubjectsSupport
     with InputSupport
     with ControlsSupport
