@@ -14,7 +14,9 @@ trait GameMap {
 
   def randomFreePlace: Coord
 
-  def place(coord: Coord, c: Char): Boolean
+  def putCharacter(coord: Coord, c: Char): Boolean
 
-  def remove(from: Coord, c: Char): Boolean
+  def removeCharacter(from: Coord, c: Char): Boolean
+
+  def flush(): Unit
 }

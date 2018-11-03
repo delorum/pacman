@@ -1,4 +1,4 @@
-package com.github.dunnololda.pacman.components.map
+package com.github.dunnololda.pacman.components.init
 
 import com.github.dunnololda.pacman.common.{InitCoords, InitCoordsBuilder}
 import com.github.dunnololda.pacman.util.Coord

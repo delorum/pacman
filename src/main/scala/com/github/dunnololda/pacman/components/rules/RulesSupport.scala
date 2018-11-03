@@ -5,6 +5,6 @@ package com.github.dunnololda.pacman.components.rules
   *
   * @author aborunov
   */
-trait RulesSupport {
+trait RulesSupport extends RulesAware {
 
 }

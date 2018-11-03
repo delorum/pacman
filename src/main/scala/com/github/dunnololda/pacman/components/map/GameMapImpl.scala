@@ -41,8 +41,7 @@ class GameMapImpl(terminal: Terminal) extends GameMap {
     if (res) {
       val res2 = removeCharacter(from, c)
       if (res2) {
-        putCharacter(to, c)
-        flush()
+        innerPutCharacter(to, c)
       }
       res2
     } else false
@@ -62,22 +61,15 @@ class GameMapImpl(terminal: Terminal) extends GameMap {
     }
   }
 
-  def place(to: Coord, c: Char): Boolean = {
+  def putCharacter(to: Coord, c: Char): Boolean = {
     val res = canGo(to)
     if (res) {
-      putCharacter(to, c)
-      flush()
+      innerPutCharacter(to, c)
     }
     res
   }
 
-  def remove(from: Coord, c: Char): Boolean = {
-    val res = removeCharacter(from, c)
-    if (res) flush()
-    res
-  }
-
-  private def removeCharacter(from: Coord, c: Char): Boolean = {
+  def removeCharacter(from: Coord, c: Char): Boolean = {
     val arr = map(from.x)(from.y)
     val res = arr.last == c
     if (res) {
@@ -88,13 +80,13 @@ class GameMapImpl(terminal: Terminal) extends GameMap {
     res
   }
 
-  private def putCharacter(to: Coord, c: Char): Unit = {
+  private def innerPutCharacter(to: Coord, c: Char): Unit = {
     terminal.setCursorPosition(to.x, to.y)
     terminal.putCharacter(c)
     map(to.x)(to.y) += c
   }
 
-  private def flush(): Unit = {
+  def flush(): Unit = {
     terminal.setCursorPosition(cols, rows - 1)
     terminal.putCharacter(' ')
     terminal.flush()

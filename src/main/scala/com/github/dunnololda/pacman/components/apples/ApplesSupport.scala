@@ -15,7 +15,7 @@ trait ApplesSupport extends ApplesAware with MapAware {
 
   (1 to 10).foreach(_ => {
     val c = map.randomFreePlace
-    map.place(c, APPLE)
+    map.putCharacter(c, APPLE)
     innerApples += c
   })
 
@@ -25,7 +25,7 @@ trait ApplesSupport extends ApplesAware with MapAware {
     if (i < 0 || i > innerApples.length - 1) sys.error(s"i=$i is out of bounds [0, ${innerApples.length - 1}]")
     else {
       val c = innerApples.remove(i)
-      map.remove(c, APPLE)
+      map.removeCharacter(c, APPLE)
     }
   }
 }
