@@ -20,7 +20,7 @@ trait PacmanCoordAware
     map.place(initCoords.bySymbol(c), Symbols.PACMAN)
   }
 
-  def updateCoord(newCoord: Coord = coord): Unit = {
+  protected def updateCoord(newCoord: Coord = coord): Unit = {
     x = newCoord.x
     y = newCoord.y
   }

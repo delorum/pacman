@@ -9,19 +9,19 @@ import com.github.dunnololda.pacman.util.Coord
   * @author aborunov
   */
 trait PacmanMoveAware extends MapAware with PacmanCoordAware with PacmanCharAware {
-  def moveUp: Boolean = {
+  protected def moveUp: Boolean = {
     move(coord.up)
   }
 
-  def moveDown: Boolean = {
+  protected def moveDown: Boolean = {
     move(coord.down)
   }
 
-  def moveLeft: Boolean = {
+  protected def moveLeft: Boolean = {
     move(coord.left)
   }
 
-  def moveRight: Boolean = {
+  protected def moveRight: Boolean = {
     move(coord.right)
   }
 
