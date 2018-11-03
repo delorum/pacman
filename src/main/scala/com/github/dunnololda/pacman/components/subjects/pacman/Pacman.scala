@@ -1,6 +1,7 @@
 package com.github.dunnololda.pacman.components.subjects.pacman
 
 import com.github.dunnololda.pacman.components.map.{InitCoordsAware, MapAware}
+import com.github.dunnololda.pacman.components.subjects.{SubjectActionAware, SubjectCoordAware, SubjectDirAware, SubjectMoveAware}
 
 /**
   * TODO
@@ -9,9 +10,9 @@ import com.github.dunnololda.pacman.components.map.{InitCoordsAware, MapAware}
   */
 abstract class Pacman
   extends PacmanCharAware
-    with PacmanCoordAware
-    with PacmanDirAware
-    with PacmanMoveAware
-    with PacmanActionAware
+    with SubjectCoordAware
+    with SubjectDirAware
+    with SubjectMoveAware
+    with SubjectActionAware
     with MapAware
     with InitCoordsAware

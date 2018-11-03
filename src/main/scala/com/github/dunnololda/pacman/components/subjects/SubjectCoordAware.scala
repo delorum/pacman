@@ -1,4 +1,4 @@
-package com.github.dunnololda.pacman.components.subjects.pacman
+package com.github.dunnololda.pacman.components.subjects
 
 import com.github.dunnololda.pacman.common.Symbols
 import com.github.dunnololda.pacman.components.map.{InitCoordsAware, MapAware}
@@ -9,10 +9,10 @@ import com.github.dunnololda.pacman.util.Coord
   *
   * @author aborunov
   */
-trait PacmanCoordAware
+trait SubjectCoordAware
   extends MapAware
     with InitCoordsAware
-    with PacmanCharAware {
+    with SubjectCharAware {
   private var x = initCoords.pacman.x
   private var y = initCoords.pacman.y
 

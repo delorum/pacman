@@ -1,4 +1,4 @@
-package com.github.dunnololda.pacman.components.subjects.pacman
+package com.github.dunnololda.pacman.components.subjects
 
 import com.github.dunnololda.pacman.components.map.MapAware
 import com.github.dunnololda.pacman.util.Dir
@@ -8,7 +8,7 @@ import com.github.dunnololda.pacman.util.Dir
   *
   * @author aborunov
   */
-trait PacmanDirAware extends MapAware with PacmanCoordAware {
+trait SubjectDirAware extends MapAware with SubjectCoordAware {
   private var innerDir: Dir = Dir.NoDir
 
   def dir: Dir = innerDir

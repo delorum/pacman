@@ -1,4 +1,4 @@
-package com.github.dunnololda.pacman.components.subjects.pacman
+package com.github.dunnololda.pacman.components.subjects
 
 import com.github.dunnololda.pacman.components.map.MapAware
 import com.github.dunnololda.pacman.util.Coord
@@ -8,7 +8,7 @@ import com.github.dunnololda.pacman.util.Coord
   *
   * @author aborunov
   */
-trait PacmanMoveAware extends MapAware with PacmanCoordAware with PacmanCharAware {
+trait SubjectMoveAware extends MapAware with SubjectCoordAware with SubjectCharAware {
   protected def moveUp: Boolean = {
     move(coord.up)
   }

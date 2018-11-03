@@ -1,4 +1,4 @@
-package com.github.dunnololda.pacman.components.subjects.pacman
+package com.github.dunnololda.pacman.components.subjects
 
 import com.github.dunnololda.pacman.components.action.ActionAware
 import com.github.dunnololda.pacman.util.Dir
@@ -8,7 +8,7 @@ import com.github.dunnololda.pacman.util.Dir
   *
   * @author aborunov
   */
-trait PacmanActionAware extends ActionAware with PacmanDirAware with PacmanMoveAware {
+trait SubjectActionAware extends ActionAware with SubjectDirAware with SubjectMoveAware {
   def action(): Unit = {
     dir match {
       case Dir.Up => moveOrNoDir(moveUp)
