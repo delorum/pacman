@@ -22,10 +22,10 @@ trait ApplesSupport extends ApplesAware with MapAware {
   def appleCoords: List[Coord] = innerApples.toList
 
   def removeApple(i: Int): Unit = {
-    if (i < 0 || i > innerApples.length - 1) sys.error(s"i=$i is out of boounds [0, ${innerApples.length - 1}]")
+    if (i < 0 || i > innerApples.length - 1) sys.error(s"i=$i is out of bounds [0, ${innerApples.length - 1}]")
     else {
       val c = innerApples.remove(i)
-      map.remove(c)
+      map.remove(c, APPLE)
     }
   }
 }

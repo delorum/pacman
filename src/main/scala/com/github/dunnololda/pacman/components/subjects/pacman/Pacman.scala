@@ -1,5 +1,6 @@
 package com.github.dunnololda.pacman.components.subjects.pacman
 
+import com.github.dunnololda.pacman.common.Symbols
 import com.github.dunnololda.pacman.components.map.GameMap
 
 /**
@@ -12,4 +13,6 @@ class Pacman(val map: GameMap)
     with PacmanCoordAware
     with PacmanDirAware
     with PacmanMoveAware
-    with PacmanActionAware
+    with PacmanActionAware {
+  map.place(map.initCoords.pacman, Symbols.PACMAN)
+}

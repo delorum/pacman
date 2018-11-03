@@ -19,5 +19,5 @@ trait GameMap {
 
   def place(coord: Coord, c: Char): Boolean
 
-  def remove(coord: Coord): Unit
+  def remove(from: Coord, c: Char): Boolean
 }
