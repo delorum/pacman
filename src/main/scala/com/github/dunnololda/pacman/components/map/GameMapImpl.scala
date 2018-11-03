@@ -1,9 +1,8 @@
 package com.github.dunnololda.pacman.components.map
 
-import com.github.dunnololda.pacman.util.Coord
-import com.github.dunnololda.pacman.{InitCoords, InitCoordsBuilder}
-import com.googlecode.lanterna.terminal.Terminal
 import com.github.dunnololda.pacman.common.Symbols._
+import com.github.dunnololda.pacman.util.Coord
+import com.googlecode.lanterna.terminal.Terminal
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -20,19 +19,10 @@ class GameMapImpl(terminal: Terminal) extends GameMap {
 
   private val map = Array.ofDim[ArrayBuffer[Char]](cols, rows)
 
-  private val initCoordsBuilder = new InitCoordsBuilder()
-
   io.Source.fromFile("map1.txt").getLines().zipWithIndex.foreach { case (line, row) =>
     line.padTo(cols, ' ').zipWithIndex.foreach { case (c, col) =>
       terminal.setCursorPosition(col, row)
       val cc = if (live(c)) {
-        c match {
-          case 'X' => initCoordsBuilder.pacman = Coord(col, row)
-          case 'B' => initCoordsBuilder.enemy1 = Coord(col, row)
-          case 'C' => initCoordsBuilder.enemy2 = Coord(col, row)
-          case 'I' => initCoordsBuilder.enemy3 = Coord(col, row)
-          case 'P' => initCoordsBuilder.enemy4 = Coord(col, row)
-        }
         FLOOR
       } else c
       terminal.putCharacter(cc)
@@ -40,8 +30,6 @@ class GameMapImpl(terminal: Terminal) extends GameMap {
     }
   }
   terminal.flush()
-
-  val initCoords: InitCoords = initCoordsBuilder.build()
 
   def canGo(to: Coord): Boolean = {
     val c = map(to.x)(to.y).last

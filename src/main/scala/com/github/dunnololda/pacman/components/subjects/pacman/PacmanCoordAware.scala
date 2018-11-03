@@ -1,6 +1,7 @@
 package com.github.dunnololda.pacman.components.subjects.pacman
 
-import com.github.dunnololda.pacman.components.map.MapAware
+import com.github.dunnololda.pacman.common.Symbols
+import com.github.dunnololda.pacman.components.map.{InitCoordsAware, MapAware}
 import com.github.dunnololda.pacman.util.Coord
 
 /**
@@ -8,9 +9,16 @@ import com.github.dunnololda.pacman.util.Coord
   *
   * @author aborunov
   */
-trait PacmanCoordAware extends MapAware {
-  private var x = map.initCoords.pacman.x
-  private var y = map.initCoords.pacman.y
+trait PacmanCoordAware
+  extends MapAware
+    with InitCoordsAware
+    with PacmanCharAware {
+  private var x = initCoords.pacman.x
+  private var y = initCoords.pacman.y
+
+  def init(): Unit = {
+    map.place(initCoords.bySymbol(c), Symbols.PACMAN)
+  }
 
   def updateCoord(newCoord: Coord = coord): Unit = {
     x = newCoord.x

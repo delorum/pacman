@@ -1,18 +1,17 @@
 package com.github.dunnololda.pacman.components.subjects.pacman
 
-import com.github.dunnololda.pacman.common.Symbols
-import com.github.dunnololda.pacman.components.map.GameMap
+import com.github.dunnololda.pacman.components.map.{InitCoordsAware, MapAware}
 
 /**
   * TODO
   *
   * @author aborunov
   */
-class Pacman(val map: GameMap)
+abstract class Pacman
   extends PacmanCharAware
     with PacmanCoordAware
     with PacmanDirAware
     with PacmanMoveAware
-    with PacmanActionAware {
-  map.place(map.initCoords.pacman, Symbols.PACMAN)
-}
+    with PacmanActionAware
+    with MapAware
+    with InitCoordsAware

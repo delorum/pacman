@@ -16,7 +16,7 @@ trait TerminalSupport extends TerminalAware {
   override val terminal: Terminal = {
     val terminal = defaultTerminalFactory.createAWTTerminal()
 
-    terminal.setSize(538, 376)
+    terminal.setSize(538, 390)
     val screenDimension = Toolkit.getDefaultToolkit.getScreenSize
     terminal.setLocation(
       (screenDimension.width - terminal.getWidth) / 2,

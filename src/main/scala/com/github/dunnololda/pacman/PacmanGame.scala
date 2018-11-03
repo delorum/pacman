@@ -10,6 +10,8 @@ import com.github.dunnololda.pacman.components.PacmanComponents
 object PacmanGame extends App {
   val components = new PacmanComponents
 
+  components.printString("Hello World!")
+
   while (true) {
     components.checkInputs()
     components.action()

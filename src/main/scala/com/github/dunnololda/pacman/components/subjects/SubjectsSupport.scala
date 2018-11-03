@@ -1,5 +1,5 @@
 package com.github.dunnololda.pacman.components.subjects
-import com.github.dunnololda.pacman.components.map.MapAware
+import com.github.dunnololda.pacman.components.map.{InitCoordsAware, MapAware}
 import com.github.dunnololda.pacman.components.subjects.pacman.Pacman
 
 /**
@@ -7,6 +7,7 @@ import com.github.dunnololda.pacman.components.subjects.pacman.Pacman
   *
   * @author aborunov
   */
-trait SubjectsSupport extends SubjectsAware with MapAware {
-  override val pacman: Pacman = new Pacman(map)
+trait SubjectsSupport extends SubjectsAware with MapAware with InitCoordsAware {
+  val pacman: Pacman = new Pacman with MapAwareImpl with InitCoordsAwareImpl
+  pacman.init()
 }
