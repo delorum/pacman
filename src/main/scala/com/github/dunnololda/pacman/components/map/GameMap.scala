@@ -16,6 +16,8 @@ trait GameMap {
 
   def putCharacter(coord: Coord, c: Char): Boolean
 
+  def removeTopCharacter(from: Coord, c: Char): Boolean
+
   def removeCharacter(from: Coord, c: Char): Boolean
 
   def flush(): Unit

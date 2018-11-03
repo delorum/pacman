@@ -7,6 +7,7 @@ import com.github.dunnololda.pacman.components.info.InfoRowSupport
 import com.github.dunnololda.pacman.components.init.InitCoordsSupport
 import com.github.dunnololda.pacman.components.input.InputSupport
 import com.github.dunnololda.pacman.components.map.MapSupport
+import com.github.dunnololda.pacman.components.rules.RulesSupport
 import com.github.dunnololda.pacman.components.subjects.SubjectsSupport
 import com.github.dunnololda.pacman.components.terminal.TerminalSupport
 
@@ -25,3 +26,4 @@ class PacmanComponents
     with ControlsSupport
     with ActionSupport
     with InfoRowSupport
+    with RulesSupport

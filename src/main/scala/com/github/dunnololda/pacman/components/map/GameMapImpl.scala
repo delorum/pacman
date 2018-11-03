@@ -39,7 +39,7 @@ class GameMapImpl(terminal: Terminal) extends GameMap {
   def move(from: Coord, to: Coord, c: Char): Boolean = {
     val res = canGo(to)
     if (res) {
-      val res2 = removeCharacter(from, c)
+      val res2 = removeTopCharacter(from, c)
       if (res2) {
         innerPutCharacter(to, c)
       }
@@ -69,11 +69,22 @@ class GameMapImpl(terminal: Terminal) extends GameMap {
     res
   }
 
-  def removeCharacter(from: Coord, c: Char): Boolean = {
+  def removeTopCharacter(from: Coord, c: Char): Boolean = {
     val arr = map(from.x)(from.y)
     val res = arr.last == c
     if (res) {
       arr.remove(arr.length - 1)
+      terminal.setCursorPosition(from.x, from.y)
+      terminal.putCharacter(arr.last)
+    }
+    res
+  }
+
+  def removeCharacter(from: Coord, c: Char): Boolean = {
+    val arr = map(from.x)(from.y)
+    val res = arr.contains(c)
+    if (res) {
+      arr -= c
       terminal.setCursorPosition(from.x, from.y)
       terminal.putCharacter(arr.last)
     }

@@ -18,6 +18,9 @@ trait SubjectCoordAware
   private var y = initCoords.pacman.y
 
   def init(): Unit = {
+    map.removeCharacter(coord, c)
+    x = initCoords.pacman.x
+    y = initCoords.pacman.y
     map.putCharacter(initCoords.bySymbol(c), Symbols.PACMAN)
   }
 

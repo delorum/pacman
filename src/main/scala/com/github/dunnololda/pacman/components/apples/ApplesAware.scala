@@ -8,6 +8,8 @@ import com.github.dunnololda.pacman.util.Coord
   * @author aborunov
   */
 trait ApplesAware {
+  def initApples(): Unit
+
   def appleCoords: List[Coord]
 
   def removeApple(i: Int): Unit

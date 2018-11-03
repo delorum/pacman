@@ -13,11 +13,16 @@ import scala.collection.mutable.ArrayBuffer
 trait ApplesSupport extends ApplesAware with MapAware {
   private val innerApples = ArrayBuffer[Coord]()
 
-  (1 to 10).foreach(_ => {
-    val c = map.randomFreePlace
-    map.putCharacter(c, APPLE)
-    innerApples += c
-  })
+  def initApples(): Unit = {
+    innerApples.clear()
+    (1 to 10).foreach(_ => {
+      val c = map.randomFreePlace
+      map.putCharacter(c, APPLE)
+      innerApples += c
+    })
+  }
+
+  initApples()
 
   def appleCoords: List[Coord] = innerApples.toList
 
