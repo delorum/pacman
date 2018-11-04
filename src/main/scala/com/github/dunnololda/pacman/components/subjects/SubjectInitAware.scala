@@ -11,9 +11,9 @@ import com.github.dunnololda.pacman.components.map.MapAware
   */
 trait SubjectInitAware extends SubjectCoordAware with MapAware with InitCoordsAware with SubjectDirAware {
   def init(): Unit = {
-    map.removeCharacter(coord, c)
+    map.removeCharacter(coord, tile)
     updateCoord(initCoords.pacman)
-    map.putCharacter(initCoords.bySymbol(c), Symbols.PACMAN)
+    map.putCharacter(initCoords.bySymbol(tile.c), Symbols.PACMAN)
     noDir
   }
 }

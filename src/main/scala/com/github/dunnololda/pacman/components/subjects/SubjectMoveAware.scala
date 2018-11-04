@@ -26,7 +26,7 @@ trait SubjectMoveAware extends MapAware with SubjectCoordAware with SubjectCharA
   }
 
   private def move(to: Coord) = {
-    val res = map.move(coord, to, c)
+    val res = map.move(coord, to, tile)
     if (res) updateCoord(to)
     res
   }

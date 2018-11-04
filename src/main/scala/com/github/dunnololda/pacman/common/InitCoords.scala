@@ -15,11 +15,11 @@ case class InitCoords(pacman: Coord,
                       enemy4: Coord) {
   def bySymbol(c: Char): Coord = {
     c match {
-      case PACMAN => pacman
-      case ENEMY1 => enemy1
-      case ENEMY2 => enemy2
-      case ENEMY3 => enemy3
-      case ENEMY4 => enemy4
+      case PACMAN.c => pacman
+      case ENEMY1.c => enemy1
+      case ENEMY2.c => enemy2
+      case ENEMY3.c => enemy3
+      case ENEMY4.c => enemy4
       case _ => sys.error(s"unexpected symbol $c")
     }
   }

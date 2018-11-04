@@ -1,6 +1,7 @@
 package com.github.dunnololda.pacman.components.subjects.pacman
 
 import com.github.dunnololda.pacman.common.Symbols._
+import com.github.dunnololda.pacman.components.map.Tile
 import com.github.dunnololda.pacman.components.subjects.SubjectCharAware
 
 /**
@@ -9,5 +10,5 @@ import com.github.dunnololda.pacman.components.subjects.SubjectCharAware
   * @author aborunov
   */
 trait PacmanCharAware extends SubjectCharAware {
-  val c: Char = PACMAN
+  val tile: Tile = PACMAN
 }
