@@ -7,5 +7,5 @@ import com.github.dunnololda.pacman.components.terminal.TerminalAware
   * @author aborunov
   */
 trait MapSupport extends MapAware with TerminalAware {
-  override val map: GameMap = new GameMapImpl(terminal)
+  override protected val map: GameMap = new GameMapImpl(terminal)
 }
