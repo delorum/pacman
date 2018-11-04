@@ -2,7 +2,7 @@ package com.github.dunnololda.pacman.components.subjects.pacman
 
 import com.github.dunnololda.pacman.components.init.InitCoordsAware
 import com.github.dunnololda.pacman.components.map.MapAware
-import com.github.dunnololda.pacman.components.subjects.{SubjectActionAware, SubjectCoordAware, SubjectDirAware, SubjectMoveAware}
+import com.github.dunnololda.pacman.components.subjects._
 
 /**
   * TODO
@@ -17,3 +17,4 @@ abstract class Pacman
     with SubjectActionAware
     with MapAware
     with InitCoordsAware
+    with SubjectInitAware

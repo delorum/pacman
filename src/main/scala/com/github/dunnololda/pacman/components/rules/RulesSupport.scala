@@ -28,7 +28,7 @@ trait RulesSupport extends RulesAware with InfoRowAware with ApplesAware with Su
       initApples()
       printWin()
     } else {
-      appleCoords.zipWithIndex.find { case (coord, idx) =>
+      appleCoords.zipWithIndex.find { case (coord, _) =>
         coord == pacman.coord
       } match {
         case Some((_, idx)) =>
